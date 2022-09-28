@@ -13,6 +13,6 @@ setuptools.setup(
     description='Package that helps to communicate with the HOZYAIN.API in python',
     long_description=long_description,
     url='https://github.com/Justcleancountry/py_hozyain_api_communicator',
-    packages=['hozyain_api'],
+    packages=['hozyain_api_communicator'],
     install_requires=['gql[all]', 'pydantic'],
 )
