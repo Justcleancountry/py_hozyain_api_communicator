@@ -3,8 +3,14 @@ Hozyain API python communicator
 
 Package that helps to communicate with HOZYAIN.API
 
-## Usage
+## Installation and updating
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install HozyainAPICommunicator like below. 
+Rerun this command to check for and install  updates .
+```bash
+pip install git+https://github.com/Justcleancountry/py_hozyain_api_communicator
+```
 
+## Usage
 ```python
 from hozyain_api_communicator import (
   HozyainAPIDataTypeBase,
