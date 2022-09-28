@@ -1,2 +1,3 @@
 from .api_communicator_service import HozyainAPICommunicatorService
 from .api_endpoint_interface import IHozyainAPIEndpoint
+from .api_data_type_base import HozyainAPIDataTypeBase
