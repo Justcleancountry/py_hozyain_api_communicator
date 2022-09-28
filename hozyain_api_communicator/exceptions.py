@@ -1,0 +1,55 @@
+class HozyainAPIException(Exception):
+    """
+    Every HOZYAIN.API exceptions is inherited from this.
+
+    Use it if you want to catch all error from this project.
+    """
+
+
+class ExceptionConfigurationError(HozyainAPIException):
+    """Exception that is executed every time when custom exceptions is used incorrectly"""
+
+
+class HozyainAPIError(HozyainAPIException):
+    """
+    Base HOZYAIN.API exception to catch every possible error.
+    Every other HOZYAIN.API exceptions is inherited from this.
+    """
+    default_message: str = None
+    default_error_code: int = None
+
+    def __init__(self, message: str = None, error_code: int = None):
+        # Check so either default message or passed message is not None
+        if message is None and self.default_message is None:
+            raise ExceptionConfigurationError(f'Exception "{self.__class__.__name__}" has no message!')
+
+        # Check so either default error code or passed error code is not None
+        if error_code is None and self.default_error_code is None:
+            raise ExceptionConfigurationError(f'Exception "{self.__class__.__name__}" has no error code!')
+
+        # Save error information into self
+        if message is None:
+            self.message = self.default_message
+        else:
+            self.message = message
+
+        if error_code is None:
+            self.error_code = self.default_error_code
+        else:
+            self.error_code = error_code
+
+        super().__init__(message)
+
+
+class HozyainAPIConnectionError(HozyainAPIError):
+    """Executed when failed to connect to the HOZYAIN.API"""
+    default_error_code = 500
+
+
+class HozyainAPIBadRequestError(HozyainAPIError):
+    """Executed when receiving 400 error from the HOZYAIN.API"""
+    default_error_code = 400
+
+
+class HozyainAPIConfigurationError(HozyainAPIException):
+    pass
