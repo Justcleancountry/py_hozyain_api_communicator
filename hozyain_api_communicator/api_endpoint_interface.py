@@ -5,7 +5,7 @@ import string
 import pydantic
 
 from .api_communicator_service import HozyainAPICommunicatorService
-from exceptions import HozyainAPIError, HozyainAPIBadRequestError, HozyainAPIConnectionError
+from .exceptions import HozyainAPIError, HozyainAPIBadRequestError, HozyainAPIConnectionError
 
 
 class IHozyainAPIEndpoint(abc.ABC):
