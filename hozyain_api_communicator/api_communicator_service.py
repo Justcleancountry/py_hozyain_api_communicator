@@ -3,7 +3,7 @@ import json
 import requests
 from gql.transport.websockets import WebsocketsTransport
 
-from .exceptions import HozyainAPIConnectionError, ImproperServiceConfigurationErrorss
+from .exceptions import HozyainAPIConnectionError, ImproperServiceConfigurationError
 
 
 class HozyainAPICommunicatorServiceMetaclass(type):
