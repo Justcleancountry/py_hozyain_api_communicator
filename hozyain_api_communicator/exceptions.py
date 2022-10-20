@@ -53,3 +53,7 @@ class HozyainAPIBadRequestError(HozyainAPIError):
 
 class HozyainAPIConfigurationError(HozyainAPIException):
     pass
+
+
+class ImproperServiceConfigurationError(Exception):
+    """Executed, when HOZYAIN.API communicator service is improperly configured"""
