@@ -5,7 +5,7 @@ import string
 import pydantic
 
 from .api_communicator_service import HozyainAPICommunicatorService
-from .exceptions import HozyainAPIError, HozyainAPIBadRequestError, HozyainAPIConnectionError
+from .exceptions import HozyainAPIError, HozyainAPIBadRequestError, HozyainAPIConnectionError, HozyainAPIInternalError
 
 
 class IHozyainAPIEndpoint(abc.ABC):
@@ -44,9 +44,24 @@ class IHozyainAPIEndpoint(abc.ABC):
     @classmethod
     def _raise_error_response(cls, error: dict):
         """Parse error that has come from the HOZYAIN.API and raise it"""
+        error_message = error['message']
+        error_code = error.get('extensions', {}).get('code', 503)
+
+        if 500 > error_code >= 400:
+            raise HozyainAPIBadRequestError(
+                message=error_message,
+                error_code=error_code,
+            )
+
+        if error_code >= 500:
+            raise HozyainAPIInternalError(
+                message=error_message,
+                error_code=error_code,
+            )
+
         raise HozyainAPIError(
-            message=error['message'],
-            error_code=error['extensions']['code']
+            message=error_message,
+            error_code=error_code,
         )
 
     @classmethod

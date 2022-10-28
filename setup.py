@@ -7,7 +7,7 @@ with open('README.md', encoding='utf-8') as readme:
 
 setuptools.setup(
     name='hozyain_api',
-    version='1.0.5',
+    version='1.0.6',
     author='Nikita Kaner',
     author_email='nikitaKaner@corp.laserpoint.ru',
     description='Package that helps to communicate with the HOZYAIN.API in python',
