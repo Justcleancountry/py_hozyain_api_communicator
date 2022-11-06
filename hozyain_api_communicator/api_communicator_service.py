@@ -1,3 +1,4 @@
+import typing
 import json
 
 import requests
@@ -28,9 +29,9 @@ class HozyainAPICommunicatorService(metaclass=HozyainAPICommunicatorServiceMetac
     url: str
     ws_transport: WebsocketsTransport
 
-    def __init__(self, url: str = None):
+    def __init__(self, url: typing.Optional[str]):
         if url is None:
-            raise ImproperServiceConfiguration('"url" is required argument!')
+            raise ImproperServiceConfigurationError('"url" is required argument!')
         # TODO: Validate api_url format
         self.url = url
 
@@ -47,6 +48,6 @@ class HozyainAPICommunicatorService(metaclass=HozyainAPICommunicatorServiceMetac
                 json={'query': body},
             )
         except requests.ConnectionError:
-            raise HozyainAPIConnectionError('Failed to connect to the HOZYAIN.API server')
+            raise HozyainAPIConnectionError('Failed to connect to the HOZYAIN.API server', error_code=HozyainAPIConnectionError.default_error_code)
 
         return json.loads(r.text)
