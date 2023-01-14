@@ -20,7 +20,7 @@ class IHozyainAPIEndpoint(abc.ABC):
     """
     # TODO: HOZYAIN.API endpoint interface
     request: str
-    response_type: pydantic.BaseModel
+    response_type: typing.Type[pydantic.BaseModel]
     transform_response: typing.Callable[[dict], dict]
 
     @classmethod
